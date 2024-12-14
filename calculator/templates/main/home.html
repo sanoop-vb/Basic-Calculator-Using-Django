@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <link rel="stylesheet" href="{% static 'home/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1> CALCULATOR </h1>
+    <div class="form-container">
+        <form action="/calculate/" method="post">
+            {% csrf_token %}
+            <label>Enter The Inputs</label>
+            <input class="input-box" type="text" name="numbers" placeholder="Number 1">
+            <input class="input-box" type="text" name="numbers" placeholder="Number 2">
+            <input class="input-box" type="text" name="numbers" placeholder="Number 3">
+            <input class="input-box" type="text" name="numbers" placeholder="Number 4">
+            
+            <label>Select an operation:</label>
+            <select name="operation">
+                <option value="addition">Addition</option>
+                <option value="subtraction">Subtraction</option>
+                <option value="multiplication">Multiplication</option>
+                <option value="division">Division</option>
+            </select>
+            <button type="submit">Calculate</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+        {% if result is not none %}
+            <p class="result">Result = {{ result }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
